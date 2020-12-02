@@ -39,8 +39,16 @@ pub fn part_two(input: &str) {
         let character_rule = cpts.get(3).unwrap().as_str().chars().next().unwrap();
         let password = cpts.get(4).unwrap().as_str();
 
-        let at_1st_pos = password.chars().nth(first_pos - 1).unwrap_or(' ') == character_rule;
-        let at_2nd_pos = password.chars().nth(second_pos - 1).unwrap_or(' ') == character_rule;
+        let at_1st_pos = password
+            .chars()
+            .nth(first_pos - 1)
+            .map(|c| c == character_rule)
+            .unwrap_or(false);
+        let at_2nd_pos = password
+            .chars()
+            .nth(second_pos - 1)
+            .map(|c| c == character_rule)
+            .unwrap_or(false);
 
         if at_1st_pos ^ at_2nd_pos {
             valid_passwords += 1;
