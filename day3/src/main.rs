@@ -6,29 +6,7 @@ fn main() {
 }
 
 fn part_one(input: &str) {
-	// Trim to ensure no linebreaks are included
-	let lines: Vec<_> = input.lines().map(|l|l.trim()).collect();
-	let width = lines[0].len();
-	let height = lines.len();
-
-	let (x_off, y_off) = (3, 1);
-	let (mut x, mut y) = (0, 0);
-
-	let mut trees = 0;
-	loop {
-		x = (x + x_off) % width;
-		y += y_off;
-
-		if y >= height {
-			break;
-		} 
-
-		// The input is ascii-only so this is correct
-		if lines[y].as_bytes()[x] == b'#' {
-			trees += 1;
-		}
-	}
-
+	let trees = eval_slope(input, (3, 1));
 	println!("[Part 1] I encountered {} trees.", trees);
 }
 
